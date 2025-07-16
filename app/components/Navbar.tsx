@@ -25,25 +25,27 @@ export default function Navbar() {
             <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset">
               <span className="absolute -inset-0.5" />
               <span className="sr-only">Open main menu</span>
-              <GiHamburgerMenu aria-hidden="true" className="block size-6 group-data-open:hidden" />
-              <IoMdClose aria-hidden="true" className="hidden size-6 group-data-open:block" />
+              <GiHamburgerMenu
+                aria-hidden="true"
+                className="block size-6 group-data-open:hidden"
+              />
+              <IoMdClose
+                aria-hidden="true"
+                className="hidden size-6 group-data-open:block"
+              />
             </DisclosureButton>
           </div>
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start ms-2">
             <div className="flex shrink-0 items-center">
-              <img
-                alt="Blacksof Logo"
-                src="/assets/logo.svg"
-  
-              />
+              <img alt="Blacksof Logo" src="/assets/logo.svg" />
             </div>
           </div>
 
           <div className="hidden lg:flex gap-[40px] items-center justify-center pr-2">
-          <Link href="/#contact">
-            <button className="bg-[#5CD6FF] text-black font-900 px-[30px] py-[10px] rounded-full cursor-pointer">
-              Contact Us
-            </button>
+            <Link href="/#contact">
+              <button className="bg-[#5CD6FF] text-black font-900 px-[30px] py-[10px] rounded-full cursor-pointer">
+                Contact Us
+              </button>
             </Link>
             <FaLinkedinIn
               aria-hidden="true"
@@ -59,10 +61,12 @@ export default function Navbar() {
 
       <DisclosurePanel className="sm:hidden">
         <div className="space-y-1 px-2 pt-2 pb-3">
-        <div className="flex gap-[40px] items-center justify-center pr-2">
-            <button className="bg-[#5CD6FF] text-black font-900 px-[30px] py-[10px] rounded-full cursor-pointer">
-              Contact Us
-            </button>
+          <div className="flex gap-[40px] items-center justify-center pr-2">
+            <Link href="/#contact">
+              <button className="bg-[#5CD6FF] text-black font-900 px-[30px] py-[10px] rounded-full cursor-pointer">
+                Contact Us
+              </button>
+            </Link>
             <FaLinkedinIn
               aria-hidden="true"
               className="text-black w-[24px] h-[24px] cursor-pointer"
