@@ -45,9 +45,9 @@ const Footer = () => {
     <footer className="max-h-full bg-[url('/assets/footer_bg.jpg')] bg-cover bg-no-repeat text-black font-manrope py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-32">
         {/* Main footer content */}
-        <div className="py-8 sm:py-12 md:py-16 flex justify-center">
+        <div className="py-8 sm:py-12 md:py-16">
           {/* Brand section */}
-          <Image src="/assets/logo.svg" alt="Supreme Group" width={120} height={110} className="mx-auto" />
+          <Image src="/assets/logo.svg" alt="Supreme Group" width={161} height={48} />
         </div>
         {/* Navigation columns */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 md:gap-12">
