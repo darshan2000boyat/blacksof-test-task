@@ -1,6 +1,7 @@
 import Herosection from "./components/Herosection";
-import Catalogue from "./components/Catalogue";
+import Catalogue from "./components/Catalogue/Catalogue";
 import Navbar from "./components/Navbar";
+import ContactUs from "./components/ContactUs";
 
 export {homeMetadata as metadata} from "./utils/metadata";
 
@@ -10,7 +11,7 @@ export default function Home() {
       <Navbar />
       <Herosection />
       <Catalogue />
-      <Herosection />
+      <ContactUs />
     </>
   );
 }
