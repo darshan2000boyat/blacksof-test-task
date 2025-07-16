@@ -7,6 +7,7 @@ import { FaLinkedinIn } from "react-icons/fa6";
 import { BsTranslate } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMdClose } from "react-icons/io";
+import Link from "next/link";
 
 const navigation = [{ name: "Dashboard", href: "#", current: true }];
 
@@ -39,9 +40,11 @@ export default function Navbar() {
           </div>
 
           <div className="hidden lg:flex gap-[40px] items-center justify-center pr-2">
+          <Link href="/#contact">
             <button className="bg-[#5CD6FF] text-black font-900 px-[30px] py-[10px] rounded-full cursor-pointer">
               Contact Us
             </button>
+            </Link>
             <FaLinkedinIn
               aria-hidden="true"
               className="text-black w-[24px] h-[24px] cursor-pointer"

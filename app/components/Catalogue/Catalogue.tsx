@@ -7,6 +7,7 @@ import { DATA, SectionType } from "./constant";
 import CatalogueLeftPanel from "./CatalogueLeftPanel";
 import CatalogueVideoPanel from "./CatalogueVideoPanel";
 import CatalogueModuleSelector from "./CatalogueModuleSelector";
+import VideoCarousel from "./VideoCarousel";
 
 export default function Catalogue() {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
@@ -14,6 +15,7 @@ export default function Catalogue() {
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   const [triggerAnimation, setTriggerAnimation] = useState(false);
+  const [triggerAnimationSmallScreen, setTriggerAnimationSmallScreen] = useState(false);
   const [userHasInteracted, setUserHasInteracted] = useState(false);
   const [isPlaying, setIsPlaying] = useState(true);
   const [progress, setProgress] = useState(0);
@@ -34,16 +36,24 @@ export default function Catalogue() {
       ([entry]) => {
         if (entry.isIntersecting && !triggerAnimation) {
           setTriggerAnimation(true);
+  
+          // Check screen width safely
+          if (typeof window !== "undefined") {
+            setTriggerAnimationSmallScreen(window.innerWidth < 1024);
+          }
         }
       },
       { threshold: 0.01 }
     );
+  
     const el = scrollAreaRef.current;
     if (el) observer.observe(el);
+  
     return () => {
       if (el) observer.unobserve(el);
     };
   }, [triggerAnimation]);
+  
 
   // Auto-scroll-based section switching
   useEffect(() => {
@@ -119,36 +129,34 @@ export default function Catalogue() {
 
   return (
     <div ref={wrapperRef} className="w-full bg-black text-white font-manrope">
-      <div className="relative h-[2500vh]">
+      <div className="relative lg:h-[2500vh]">
         {/* Heading */}
-        <div className="sticky top-0 h-screen flex items-center justify-center z-50">
+        <div className="lg:sticky top-0 lg:h-screen flex items-center justify-center z-50">
           <motion.h2
             initial={{ y: 0 }}
-            animate={triggerAnimation ? { y: -300 } : { y: 0 }}
+            animate={triggerAnimation && !triggerAnimationSmallScreen ? { y: -300 } : { y: 0 }}
             transition={{ duration: 1.4, ease: "easeInOut" }}
-            className="text-4xl text-center w-1/2"
+            className="text-4xl text-center lg:w-1/2"
           >
             Evolving the drive with{" "}
             <span className="font-bold">360-degree</span> nonwoven solutions
           </motion.h2>
         </div>
 
-        {/* Spacer */}
-        <div className="h-[100vh]" />
-        <div ref={scrollAreaRef} className="h-[50vh]" />
+        {/* Spacers */}
+        <div className="lg:h-[100vh]" />
+        <div ref={scrollAreaRef} className="lg:h-[50vh]" />
 
         {/* Carousel Section */}
         <motion.div
-          className="sticky top-0 z-50 flex flex-col h-screen"
+          className="sticky top-0 z-50 hidden lg:flex flex-col lg:h-screen"
           initial={{ y: 500, opacity: 0 }}
           animate={
-            triggerAnimation
-              ? { y: 0, opacity: 1 }
-              : { y: 500, opacity: 0 }
+            triggerAnimation ? { y: 0, opacity: 1 } : { y: 500, opacity: 0 }
           }
           transition={{ duration: 1.4, ease: "easeInOut", delay: 0.2 }}
         >
-          <div className="flex-1 flex justify-evenly bg-transparent text-white">
+          <div className="flex flex-1 justify-evenly bg-transparent text-white">
             <CatalogueLeftPanel
               activeSection={activeSection}
               handleSectionChange={handleSectionChange}
@@ -170,6 +178,10 @@ export default function Catalogue() {
           />
         </motion.div>
       </div>
+      <main className="block lg:hidden bg-black min-h-screen px-4">
+        <VideoCarousel section="PV" />
+        <VideoCarousel section="CV" />
+      </main>
     </div>
   );
 }
