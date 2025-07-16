@@ -10,6 +10,7 @@ function Herosection() {
         autoPlay
         loop
         muted
+        preload="metadata"
         className="absolute inset-0 object-cover w-full h-full -z-10 opacity-20"
       >
         <source
