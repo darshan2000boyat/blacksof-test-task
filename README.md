@@ -16,6 +16,7 @@ This project is a modern web application built with [Next.js](https://nextjs.org
 - [Challenges & Solutions](#challenges--solutions)
 - [Upcoming Features & Improvements](#upcoming-features--improvements)
 - [Additional Remarks](#additional-remarks)
+- [Author](#author)
 
 ---
 
