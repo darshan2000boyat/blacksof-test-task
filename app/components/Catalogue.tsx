@@ -69,8 +69,8 @@ export default function Catalogue() {
 
   return (
     <div ref={wrapperRef} className="w-full bg-black text-white font-manrope">
-      <div className="relative h-[700vh]">
-        {/* Sticky Heading - unchanged */}
+      <div className="relative h-[2500vh]">
+        {/* Sticky Heading */}
         <div className="sticky top-0 h-screen flex items-center justify-center z-50">
           <motion.h2
             initial={{ y: 0 }}
@@ -82,7 +82,6 @@ export default function Catalogue() {
             <span className="font-bold">360-degree</span> nonwoven solutions
           </motion.h2>
         </div>
-        {/* Sticky Heading Ends Here */}
 
         {/* Trigger Section */}
         <div className="h-[100vh]" />
@@ -90,15 +89,35 @@ export default function Catalogue() {
         {/* Scroll Trigger Area */}
         <div ref={scrollAreaRef} className="h-[50vh]" />
 
-        {/* Modified Sticky Section */}
-        <div className="sticky top-0 h-screen z-10 flex flex-col">
+        {/* Carousel Section - Modified with animation */}
+        <motion.div 
+          className="sticky top-0 z-10 flex flex-col h-screen"
+          initial={{ y: 500, opacity: 0 }}
+          animate={triggerAnimation ? { 
+            y: 0, 
+            opacity: 1 
+          } : { 
+            y: 500, 
+            opacity: 0 
+          }}
+          transition={{ 
+            duration: 1.4, 
+            ease: "easeInOut",
+            delay: 0.2 // Slight delay after heading animation
+          }}
+        >
           <div className="flex-1 flex justify-evenly bg-black text-white">
             {/* Left Panel */}
             <div className="w-[35%] h-full p-16 flex flex-col justify-center items-center">
               <div>
                 <div className="border-l-2 border-white pl-4 text-start">
-                  <button className="h-[100px] text-left">
-                    {" "}
+                  <button 
+                    className="h-[100px] text-left"
+                    onClick={() => {
+                      setActiveSection("PV");
+                      setActiveIndex(0);
+                    }}
+                  >
                     <h2
                       className={`text-3xl font-semibold ${
                         activeSection === "PV" ? "opacity-100" : "opacity-30"
@@ -109,7 +128,13 @@ export default function Catalogue() {
                     <p>Revving up innovation from interior to exterior.</p>
                   </button>
 
-                  <button className="h-[100px] text-left">
+                  <button 
+                    className="h-[100px] text-left"
+                    onClick={() => {
+                      setActiveSection("CV");
+                      setActiveIndex(0);
+                    }}
+                  >
                     <h2
                       className={`text-3xl font-semibold mt-4 ${
                         activeSection === "CV" ? "opacity-100" : "opacity-30"
@@ -135,7 +160,9 @@ export default function Catalogue() {
                   loop
                   muted
                   playsInline
-                  className="absolute max-w-full max-h-full transition-opacity duration-700 bg-black h-full"
+                  className={`absolute max-w-full max-h-full transition-opacity duration-700 bg-black h-full ${
+                    idx === activeIndex ? "opacity-100" : "opacity-0"
+                  }`}
                 >
                   <source src={`/assets/${video}`} type="video/mp4" />
                 </video>
@@ -143,7 +170,7 @@ export default function Catalogue() {
             </div>
           </div>
 
-          {/* Module Buttons - positioned at bottom */}
+          {/* Module Buttons */}
           <div className="absolute bottom-16 right-[28rem]">
             <div className="flex space-x-8">
               {DATA[activeSection].modules.map((module, idx) => (
@@ -168,7 +195,7 @@ export default function Catalogue() {
               ))}
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
